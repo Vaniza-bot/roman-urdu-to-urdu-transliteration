@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+  background: #111827;
+  border-radius: 12px;
+}
+
+.logo {
+  font-weight: 700;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card {
+  margin-top: 20px;
+  padding: 20px;
+  background: #1e293b;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  background: #0f172a;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 12px;
+  resize: none;
+  font-size: 15px;
+}
+
+textarea:focus {
+  outline: none;
+  border: 1px solid #3b82f6;
+}
+
+.counter {
+  text-align: right;
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.convert-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+}
+
+.copy-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #10b981;
+  color: white;
+  cursor: pointer;
+}
