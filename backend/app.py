@@ -13,20 +13,13 @@ CORS(app)
 # ======================================
 # ✅ Configuration
 # ======================================
-# Update MODEL_PATH to the new folder on Desktop
-MODEL_PATH = "C:/Users/shahid/Desktop/my_model"
-SOURCE_LANG = "en"        # Roman Urdu can be treated as 'en'
+# Load model from Hugging Face instead of local path
+MODEL_ID = os.getenv("MODEL_ID", "Vaniza-bot/roman-urdu-transliteration-model")
+
+SOURCE_LANG = "en"   # Roman Urdu treated as English
 TARGET_LANG = "ur"
 
 print("🔄 Loading model and tokenizer...")
-
-# ======================================
-# ✅ Check local model folder
-# ======================================
-if not os.path.exists(MODEL_PATH):
-    raise FileNotFoundError(f"Local model folder not found: {MODEL_PATH}")
-else:
-    print(f"✅ Local model folder found: {MODEL_PATH}")
 
 # ======================================
 # ✅ Device Setup
@@ -37,7 +30,6 @@ print(f"🔄 Using device: {device}")
 # ======================================
 # ✅ Load Tokenizer
 # ======================================
-# Use pre-trained tokenizer as base
 tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_418M")
 
 # Add custom token safely
@@ -45,14 +37,14 @@ if "__roman-ur__" not in tokenizer.get_vocab():
     tokenizer.add_tokens(["__roman-ur__"], special_tokens=True)
 
 # ======================================
-# ✅ Load Model
+# ✅ Load Model from Hugging Face
 # ======================================
 model = M2M100ForConditionalGeneration.from_pretrained(
-    MODEL_PATH,
+    MODEL_ID,
     ignore_mismatched_sizes=True
 )
 
-# Resize embeddings if a token was added
+# Resize embeddings if token added
 model.resize_token_embeddings(len(tokenizer))
 model.to(device)
 
@@ -102,10 +94,10 @@ def translate():
 # ======================================
 @app.route("/", methods=["GET"])
 def home():
-    return jsonify({"message": "Roman Urdu Local Translator Running 🚀"})
+    return jsonify({"message": "Roman Urdu Translator Running 🚀"})
 
 # ======================================
 # ✅ Run Server
 # ======================================
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(host="0.0.0.0", port=7860)
