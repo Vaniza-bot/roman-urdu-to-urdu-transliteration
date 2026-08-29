@@ -1,13 +1,28 @@
-body {
+html, body, #root {
+  height: 100%;
+  width: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* 🔥 APPLY GRADIENT EVERYWHERE */
+html, body {
+  background: linear-gradient(135deg, #91e3f8, #ffffff);
+  background-attachment: fixed;
+}
+
+/* root stays transparent */
+#root {
+  min-height: 100vh;
+  background: transparent;
+}
+
+/* prevent scroll glow issues */
+body {
+  font-family: "Inter", sans-serif;
+  overscroll-behavior: none;
+}
+
+* {
+  box-sizing: border-box;
 }

@@ -1,76 +1,56 @@
-import React, { useState, useRef } from "react";
-import "./App.css";
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import Login from "./Login";
+import Signup from "./Signup";
+import Transliterate from "./Transliterate";
+
+import Layout from "./layout/Layout";
+
+import Home from "./pages/Home";
+import HowItWorks from "./components/sections/HowItWorks";
+import WhyUse from "./components/sections/WhyUse";
+import FAQ from "./components/sections/FAQ";
+import AboutUs from "./components/sections/AboutUs";
+import Contact from "./components/sections/Contact";
+import Privacy from "./components/sections/Privacy";
+import Terms from "./components/sections/Terms";
+
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const [text, setText] = useState("");
-  const [output, setOutput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const textareaRef = useRef(null);
-
-  const handleChange = (e) => {
-    setText(e.target.value);
-    textareaRef.current.style.height = "auto";
-    textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
-  };
-
-  const translate = async () => {
-    setLoading(true);
-
-    try {
-      const response = await fetch("http://127.0.0.1:5000/translate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
-      });
-
-      const data = await response.json();
-      setOutput(data.translated_text);
-    } catch (error) {
-      setOutput("Error connecting to backend");
-    }
-
-    setLoading(false);
-  };
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(output);
-  };
-
   return (
-    <div className="container">
-      <nav className="navbar">
-        <div className="logo">TranslitAI</div>
-        <div className="status">Private Beta</div>
-      </nav>
+    <Routes>
+      {/* AUTH ROUTES */}
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
 
-      <div className="card">
-        <h2>Roman Urdu → Urdu Translator</h2>
+      {/* PROTECTED MAIN APP */}
+      <Route
+        path="/app"
+        element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }
+      >
+        {/* HOME */}
+        <Route index element={<Home />} />
 
-        <textarea
-          ref={textareaRef}
-          placeholder="Enter Roman Urdu..."
-          value={text}
-          onChange={handleChange}
-          className="input"
-        />
+        {/* TRANSLITERATOR */}
+        <Route path="transliterate" element={<Transliterate />} />
 
-        <div className="counter">{text.length} characters</div>
-
-        <button className="convert-btn" onClick={translate}>
-          {loading ? "Converting..." : "Convert"}
-        </button>
-      </div>
-
-      {output && (
-        <div className="card result">
-          <h3>Urdu Output</h3>
-          <p>{output}</p>
-          <button className="copy-btn" onClick={copyToClipboard}>
-            Copy
-          </button>
-        </div>
-      )}
-    </div>
+        {/* SECTIONS */}
+        <Route path="how" element={<HowItWorks />} />
+        <Route path="why" element={<WhyUse />} />
+        <Route path="faq" element={<FAQ />} />
+        <Route path="about" element={<AboutUs />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="privacy" element={<Privacy />} />
+        <Route path="terms" element={<Terms />} />
+      </Route>
+    </Routes>
   );
 }
 
