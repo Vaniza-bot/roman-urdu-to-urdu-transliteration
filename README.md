@@ -21,7 +21,7 @@ For example:
 Roman Urdu:
 aap kaise hain
 
-Urdu:  آپ کیسے ہیں
+Urdu:  
 آپ کیسے ہیں
 ```
 
