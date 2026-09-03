@@ -169,7 +169,7 @@ Multiple complementary metrics were used to evaluate transliteration quality.
 
 | Metric               |             M2M100 |              mBART |
 | -------------------- | -----------------: | -----------------: |
-| BLEU                 | **81.20**          |    **75.26 **      |
+| BLEU                 | **81.20**          |  **75.26 **        |
 | ChrF                 | **90.39**          |  **86.66**         |
 | Character-level BLEU | **92.49**          |  **89.46**         |
 | CER                  | **0.039**          |  **0.056**         |
