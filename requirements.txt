@@ -1,5 +1,9 @@
-flask
+Flask
 flask-cors
+flask-sqlalchemy
+flask-bcrypt
+flask-jwt-extended
+python-dotenv
 transformers
 torch
 sentencepiece
